@@ -1,0 +1,177 @@
+/******************
+FUENTES Y TEXTOS
+
+Estilos de la fuente:
+    font-family
+    font-size
+    font-weight
+    font-style
+    font-variant
+    line-height
+    font: font-style font-variant font-weight font-size line-height font-family
+
+*/
+
+.font {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    font-weight: 800;
+    font-weight: 400;
+    font-style: italic;
+    font-style: oblique;
+    font-variant: small-caps;
+    font-variant: normal;
+    /*line-height es el interlineado*/
+    line-height: 2;
+    /*font es un shorthand de todas las propiedades anteriores*/
+    font: italic small-caps 600 24px / 0.65 monospace;
+}
+
+/*
+Formato woff o woff2 - Web Open Font Format
+
+font-display
+    auto - permite que el navegador utilice el método predeterminado que
+    suele ser block.
+
+    block - oculta brevemente el texto hasta que la fuente haya sido des-
+    cargada por completo.
+
+    swap - indica al navegador que utilice la fuente alternativa para mos-
+    trar el texto.
+
+    fallback - es una mezcla de auto y swap.
+
+    optional - ocultará el texto, luego lo cargará con la fuente alter-
+    nativa y finalmente aplicará la fuente personalizada.
+*/
+
+@font-face {
+    font-family: "Chalet";
+    src: url(../assets/Chalet.woff) format("woff");
+    font-display: swap;
+    /*
+    En caso de que se tenga más de un archivo de fuentes:
+    src:    url("../assets/Chalet.woff") format("woff"),
+            url("../assets/Chalet.woff2") format("woff2");
+*/
+
+}
+
+.chalet {
+    /*  Si no encuentra "Chalet", carga sans-serif*/
+    font-family: "Chalet", sans-serif;
+    font-size: 2rem;
+}
+
+@font-face {
+    font-family: "Pecita";
+    src: url(../assets/Pecita.woff) format("woff");
+    font-display: swap;
+}
+
+.pecita {
+    font-family: "Pecita", cursive;
+    font-size: 2rem;
+}
+
+.raleway {
+    font-family: 'Raleway', sans-serif;
+    font-size: 2rem;
+}
+
+/*
+Estilos de Texto
+
+text-align
+text-decoration
+text-indent
+text-overflow
+    overflow: hidden
+    white-spaces: nowrap
+text-transform
+
+letter-spacing
+white-space
+word-break
+word-spacing
+writing-mode
+*/
+
+.text {
+    font-size: 2rem;
+    text-align: justify;
+    text-decoration: overline;
+    text-decoration: none;
+    text-indent: 2rem;
+    text-transform: capitalize;
+    text-transform: lowercase;
+    text-transform: uppercase;
+    text-transform: none;
+    letter-spacing: .5rem;
+    word-break: break-all;
+    writing-mode: horizontal-tb;
+    writing-mode: vertical-lr;
+    writing-mode: vertical-rl;
+}
+
+.text a {
+    text-decoration: none;
+}
+
+.text-overflow {
+    background-color: aqua;
+    border: thin solid black;
+    padding: 1rem;
+    width: 50%;
+    /*  oculta el contenido que sobrepasa el limite*/
+    overflow: hidden;
+    /*
+    ignora saltos de línea, el texto no se ajusta
+    y permanece en una sola linea
+    */
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 2rem;
+}
+
+.white-space {
+    white-space: pre;
+}
+
+.word-spacing {
+    font-size: 2rem;
+    word-spacing: 3rem;
+}
+
+/********************
+ICONOS TIPOGRÁFICOS
+*/
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}

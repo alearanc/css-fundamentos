@@ -1,0 +1,36 @@
+/*Imágen responsiva, se adapta al contenedor*/
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.card {
+    border: medium solid black;
+    width: 400px;
+    height: 400px;
+}
+
+/*object-fit y object-position se comportan de manera similar a
+background-position
+
+    Se utiliza exclusivamente cuando necesite medidas concretas a las
+    imágenes (componente card por ejemplo)
+*/
+.card img {
+    background-color: antiquewhite;
+    height: 300px;
+    /*Valor por defecto*/
+    object-fit: fill;
+    /*Es preferible utilziar cualquiera de estos tres*/
+    object-fit: cover;
+    object-fit: none;
+    object-fit: contain;
+    /*toma el valor menor de los valores contain y none*/
+    /*si la escala en cointain es menor, lo toma. Si none es menor, lo toma*/
+    object-fit: scale-down;
+    object-position: left top;
+    object-position: left center;
+    object-position: right bottom;
+    object-position: -40px center;
+    object-position: 50% 50%;
+}

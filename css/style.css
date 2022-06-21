@@ -1,0 +1,367 @@
+/* ********************
+SELECTORES BÁSICOS
+    1) Etiquetas - elementos html
+    2) Identificadores - atributo - id - #
+    3) Clases - atributo class
+*/
+h1 {
+    background-color: black;
+    color: aquamarine;
+    text-align: center;
+    padding: 10px;
+}
+
+p {
+    color: midnightblue;
+}
+
+/*Dar estilos con id es un antiPatron*/
+#parrafo-dos {
+    background-color: skyblue;
+}
+
+/*Dar estilos con clases nos permite reutilizar nuestro código CSS*/
+.bg-skyblue {
+    background-color: skyblue;
+}
+
+.bg-steelblue {
+    background-color: steelblue;
+}
+
+.text-20 {
+    font-size: 20px;
+}
+
+.text-32 {
+    font-size: 32px;
+}
+
+.text-white {
+    color: white;
+}
+
+/* ********************
+SELECTORES AVANZADOS
+    1) Selectores de hijos
+        1.a) Selectores de hijos directos
+        1.b) Selectores de hijos descendientes
+    2) Selectores de hermanos
+        2.a) Selectores de hermanos en gral
+        2.b) Selectores de hermanos adyacentes
+    3) Selectores de atributo
+    4) Selector universal
+*/
+
+.hijos-directos>li {
+    background-color: thistle;
+}
+
+.hijos-descendientes b {
+    background-color: thistle;
+}
+
+/*Los selectores de hermanos van a aplicar a los elementos hermanos y que esten por debajo del elemento de referencia*/
+.hermanos-general~li {
+    background-color: thistle;
+}
+
+/*Aplica al elemento adyacente que esté inmediatamente por debajo*/
+.hermanos-adyacentes+li {
+    background-color: thistle;
+}
+
+/*Selectores de atributos*/
+.selectores-atributos a[href] {
+    color: orangered;
+}
+
+.selectores-atributos a[target="_blank"] {
+    font-weight: bold;
+}
+
+/*El comodín del * aplica el estilo si contiene la palabra en cuestión en cualquier parte*/
+.selectores-atributos a[href *="alearanc"] {
+    font-size: 24px;
+}
+
+/*El comodín del ^ aplica el estilo si contiene el texto en cuestión al inicio*/
+.selectores-atributos a[href ^="https"] {
+    text-decoration: none;
+}
+
+/*El comodín del ^ aplica el estilo si contiene el texto en cuestión al final*/
+.selectores-atributos a[href $=".com/"] {
+    background-color: black;
+}
+
+/*El comodín del ~ aplica el estilo si contiene el texto en cuestión en una lista separada por espacios*/
+.selectores-atributos a[class~="cursos"] {
+    background-color: midnightblue;
+}
+
+/*El comodín del | aplica el estilo si contiene el texto en cuestión en una lista separada por espacios y que después del texto venga un guion medio -*/
+.selectores-atributos a[class |="menu"] {
+    font-style: italic;
+}
+
+/*Selector Universal (*) */
+* {
+    font-family: sans-serif;
+}
+
+.selector-universal * {
+    font-size: 24px;
+}
+
+/* ********************
+PSEUDO-CLASES: 
+Dan estilos dependiendo del contexto, posición o estado del elemento
+*/
+
+.form-pseudoclases *:required {
+    border-color: yellow;
+}
+
+.form-pseudoclases *:valid {
+    border-color: green;
+}
+
+.form-pseudoclases *:invalid {
+    border-color: red;
+}
+
+.form-pseudoclases *:focus {
+    background-color: skyblue;
+}
+
+.form-pseudoclases *:disabled {
+    background-color: pink;
+}
+
+.menu-pseudoclases a:visited {
+    color: olive;
+}
+
+/*visited debe ir arriba del estado hover para que no lo deshabilite*/
+/*hover al ser un estado interactivo debería definirse al final*/
+.menu-pseudoclases a:hover {
+    color: orange;
+}
+
+.p-pseudoclases:hover {
+    font-size: 20px;
+}
+
+#temario-css:target {
+    background-color: lightgreen;
+}
+
+.lista-pseudoclases li:first-child {
+    color: green;
+}
+
+.lista-pseudoclases li:last-child {
+    color: violet;
+}
+
+.lista-pseudoclases li:nth-child(3) {
+    color: navy;
+}
+
+.lista-pseudoclases li:nth-child(4n) {
+    font-size: 20px;
+}
+
+.lista-pseudoclases li:nth-child(3n + 1) {
+    font-weight: bold;
+}
+
+.lista-pseudoclases li:nth-child(even) {
+    background-color: yellow;
+}
+
+.lista-pseudoclases li:nth-child(odd) {
+    background-color: orange;
+}
+
+.articulo-pseudoclases p:first-of-type {
+    background-color: pink;
+}
+
+.articulo-pseudoclases p:last-of-type {
+    background-color: violet;
+}
+
+.articulo-pseudoclases p:nth-of-type(3) {
+    background-color: fuchsia;
+}
+
+.articulo-pseudoclases *:not(p) {
+    background-color: beige;
+}
+
+/* **************
+PSEUDO-ELEMENTOS
+
+Dan estilos a partes específicas de un elemento, se usa el :: para
+diferenciarlos de las pseudo-clases
+*/
+
+/*before y after se utilizan para agregar contenido antes y después de un elemento respectivamente*/
+.saga-geminis::before {
+    content:"🤼‍♂️";
+}
+
+.saga-geminis::after {
+    content:"♊";
+}
+
+.saga-precio::before {
+    content:"$";
+    font-weight: bold;
+}
+
+.saga-precio::after {
+    content:"USD";
+    font-weight: bold;
+}
+
+.p-pseudoelementos::first-letter {
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.p-pseudoelementos::first-line {
+    color:coral;
+}
+
+.p-pseudoelementos::selection {
+    color:greenyellow;
+    background-color: black;
+}
+
+.input-pseudoelementos::placeholder {
+    color: green;
+}
+
+/* **********************
+AGRUPACIÓN DE SELECTORES
+*/
+
+.form-agrupar-selectores input[type="text"], 
+.form-agrupar-selectores input[type="email"], 
+.form-agrupar-selectores textarea {
+    border-color: yellow;
+    border-width: 2px;
+    border-style: dashed;
+    background-color: black;
+    font-size: 20px;
+    display:block;
+    width: 300px;
+}
+
+/* ****************
+EL ALGORITMO DE CSS
+
+Es la forma en que el navegador aplica los estilos al documento
+HTML. Es vital para entender como se aplican y en algunas ocasiones se sobreescriben las reglas CSS.
+    1) La Cascada.
+    2) La Especificidad.
+    3) La Herencia.
+*/
+
+/*
+    *********
+    CASCADA
+    Es el mecanismo en que el navegadir aplica los estilos. y toma en cuenta lo siguiente en este
+    orden:
+    1) El origen del Còdigo:
+        -El User Agent (los estilos por defecto del navegador)
+        -Personalizaciones del usuario
+        -Los estilos del autor
+    2) La Especificidad del Selector
+    3) Orden de apariciòn
+*/
+
+/*
+
+    *********
+    ESPECIFICIDAD
+    Es el peso que tiene un selector cuando hay conflicto de estilos. Se
+    calcula de la siguiente form:
+
+    Etiquetas y pseudoelementos ------------- 0,0,0,1
+    Clases, atributos y pseudoclases -------- 0,0,1,0
+    Identificadores ------------------------- 0,1,0,0
+    Estilos en línea ------------------------ 1,0,0,0
+    !important --------------- Rompe la especificidad
+*/
+/*
+    **********
+    HERENCIA
+    Es la capacidad de un selector de obtener (heredar) los valores de sus ancestros
+    más cercanos. Para aplicarla se usa el valor inherit, si queremos evitarla
+    podemos asignar otro valor o inicializar la propiedad en cuestión con el valor initial.
+*/
+
+/*PRACTICANDO CASCADA Y ESPECIFICIDAD*/
+
+/*Mala práctica*/
+blockquote#cita-marco.cita-marco {
+    background-color: lightsteelblue;
+}
+
+blockquote {
+    background-color: burlywood;
+}
+
+#cita-marco {
+    background-color: lightgreen;
+}
+
+blockquote.cita-marco {
+    background-color: tomato;
+}
+/* Por Cascada uno pensaría que el color a aplicar es cornflowerblue */
+.cita-marco {
+    background-color: cornflowerblue;
+}
+
+/*Rompiendo la especificidad, incluso al estilo aplicado en línea
+ES UNA MALA PRÁCTICA
+*/
+.cita-marco {
+    background-color: mediumaquamarine !important;
+}
+
+blockquote#cita-marco {
+    background-color: lightsalmon;
+}
+
+.cita-marco {
+    background-color: moccasin !important;
+    font-size: 32px;
+    border-style: dotted;
+}
+
+.cita-marco cite {
+    background-color: pink;
+    background-color: inherit;
+    font-size: 24px;
+    font-size: initial;
+    border-style: groove;
+    border-color: blue;
+}
+
+/*
+https://autoprefixer.github.io/
+https://caniuse.com/
+
+Prefijos de los navegadores
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+
+*/

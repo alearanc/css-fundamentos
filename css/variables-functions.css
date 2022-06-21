@@ -1,0 +1,86 @@
+/**********************
+VARIABLES AND FUNCTIONS
+
+Las variables tienen un scope que va desde el selector
+en el que es declarado, hacia sus descendientes.
+
+Si lo que se necesita es declarar variables para todo el
+documento html, en lugar de hacerlo para selectores, lo que
+se puede hacer es:
+    -   declarar la variable en el selector html
+    -   (recomendado) utilizar la pseudoclase :root, que hace
+        referencia a la etiqueta html, pero con una mayor
+        especificidad.
+*/
+
+
+
+:root {
+    color: darkgreen;
+    --default-bg-color: skyblue;
+}
+
+html {
+    font-size: 16px;
+    color: red;
+    box-sizing: border-box;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+.custom-props-1 {
+    --primary-color: gray;
+    --font-size: 32px;
+    background-color: var(--primary-color);
+}
+
+.custom-props-2 {
+    background-color: var(--default-bg-color);
+    border: thin solid var(--border-color);
+    padding: 1rem;
+}
+
+.custom-props-3 {
+    font-size: var(--font-size);
+    border: thin solid var(--border-color);
+}
+
+.title-props {
+    /*Aquí no toma el color definido en custom-props
+    porque no es un descendiente del selector, entonces
+    toma el color del segundo parámetro*/
+    color: var(--primary-color, orange);
+    /*
+        Puedo declarar otra variable con el mismo nombre,
+        total es un scope distinto.
+    */
+    --primary-color: navy;
+    /*
+        Ya obtiene el color navy
+    */
+    background-color: var(--default-bg-color);
+}
+
+.ch10 {
+    --padding-size: 3ch;
+    --num-ch: 10ch;
+    background-color: var(--default-bg-color);
+    font-size: 2rem;
+    padding: var(--padding-size);
+    width: calc(var(--num-ch) + var(--padding-size) * 2);
+}
+
+.min-max {
+    background-color: var(--default-bg-color);
+    margin-top: 1rem;
+    width: min(300px, 20vw, 20rem);
+    height: max(200px, 25vh);
+}
+
+h1 {
+    font-size: clamp(2rem, 1rem + 3vw, 3rem);
+}

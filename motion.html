@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/motion.css">
+    <title>Movimientos en CSS</title>
+</head>
+
+<body>
+    <h1>Movimiento en CSS</h1>
+    <hr>
+    <section class="transitions">
+        <h2>Transiciones</h2>
+        <div class="box"></div>
+        <article class="card">
+            <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+        </article>
+    </section>
+    <hr>
+    <section class="transforms">
+        <h2>Transformaciones</h2>
+        <h3>Transformaciones en 2D</h3>
+        <article class="card transform-2d">
+            <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+        </article>
+        <h3>Transformaciones en 3D</h3>
+        <article class="card transform-3d">
+            <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+        </article>
+        <h3>Origen de la transformación</h3>
+        <article class="card transform-origin">
+            <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+        </article>
+        <h3>Flip Cards</h3>
+        <article class="flip-card-1">
+            <div class="flip-face flip-front">
+                <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+            </div>
+            <div class="flip-face flip-back">
+                <img src="assets/BuenosDias.jpg" alt="Buenos días">
+            </div>
+        </article>
+        <article class="flip-card-2">
+            <div class="flip-face flip-front">
+                <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+            </div>
+            <div class="flip-face flip-back">
+                <img src="assets/BuenosDias.jpg" alt="Buenos días">
+            </div>
+        </article>
+    </section>
+    <hr>
+    <section class="animations">
+        <h2>Animaciones</h2>
+        <article class="card my-animation">
+            <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+        </article>
+        <article class="card my-animation-2">
+            <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+        </article>
+        <article class="card animation-multiple">
+            <img src="assets/puesta-sol.jpg" alt="Puesta de Sol">
+        </article>
+    </section>
+    <hr>
+    <section class="motion-examples">
+        <h2>Ejemplos de efectos de movimiento en CSS</h2>
+        <h3>FadeIn / FadeOut</h3>
+        <div class="fade-in">🐶</div>
+        <div class="fade-out">🐶</div>
+        <div class="shake">☕</div>
+        <h3>Pulsaciones</h3>
+        <div class="pulse">🦎</div>
+        <h3>Dibujo y animacion en CSS</h3>
+        <h4>Corazón</h4>
+        <div class="pulse">Pulse</div>
+        <div class="heart"></div>
+        <h4>Spinner / Loader</h4>
+        <div class="spinner"></div>
+
+        <h3>Botones Animados</h3>
+        <button class="btn anim-bottom to-left">Animación izquierda</button>
+        <button class="btn anim-bottom to-center">Animación Centro</button>
+        <button class="btn anim-bottom to-right">Animación Derecha</button>
+        <button class="btn anim-bg-gradient">Fondo con Gradiente</button>
+
+        <h3>Menú de Pestañas (Tabs)</h3>
+        <nav class="tabs-menu">
+            <input type="radio" id="tab-1" name="tabs">
+            <label for="tab-1">Seccion 1</label>
+            <input type="radio" id="tab-2" name="tabs">
+            <label for="tab-2">Seccion 2</label>
+            <input type="radio" id="tab-3" name="tabs">
+            <label for="tab-3">Seccion 3</label>
+            <input type="radio" id="tab-4" name="tabs">
+            <label for="tab-4">Seccion 4</label>
+            <div class="tab-bg-hover"></div>
+        </nav>
+
+        <h3>Menú Off Canvas</h3>
+        <!-- Orden a respetar: input, label, nav -->
+        <!-- Tanto el input como la hamburguesa, como el menú de navegación
+        tienen que ser hermanos para que funcione con CSS puro (sin JS)-->
+        <input type="checkbox" class="off-canvas-btn">
+        <label class="off-canvas-burger"></label>
+        <nav class="off-canvas-menu">
+            <div class="off-canvas-menu-container">
+                <a href="#" class="off-canvas-link">Sección 1</a>
+                <a href="#" class="off-canvas-link">Sección 2</a>
+                <a href="#" class="off-canvas-link">Sección 3</a>
+                <a href="#" class="off-canvas-link">Sección 4</a>
+                <a href="#" class="off-canvas-link">Sección 5</a>
+            </div>
+        </nav>
+
+        <h3>Ventana Modal</h3>
+        <a href="#modal-1">Abrir Modal</a>
+        <article id="modal-1" class="modal">
+            <div class="modal-container">
+                <!-- este id solo cumple la funcion de permitir el cierre de la ventana modal -->
+                <a href="#cerrar" class="modal-close">X</a>
+                <h2>Esto es una Ventana Modal</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat recusandae ut, veritatis porro
+                    quibusdam odit officia placeat error consequatur nihil perferendis odio reprehenderit laudantium
+                    alias! Libero sit sint ea doloremque.</p>
+                <ul>
+                    <li><a href="">Enlace 1</a></li>
+                    <li><a href="">Enlace 2</a></li>
+                    <li><a href="">Enlace 3</a></li>
+                    <li><a href="">Enlace 4</a></li>
+                    <li><a href="">Enlace 5</a></li>
+                    <li><a href="">Enlace 6</a></li>
+                </ul>
+            </div>
+        </article>
+
+        <h3>Star Wars Intro</h3>
+        <article class="star-wars">
+            <div class="star-wars-container">
+                <h2>EPISODIO v</h2>
+                <h3>EL IMPERIO CONTRAATACA</h3>
+                <p>
+                    Es una época oscura para la
+                    Rebelión. Aunque la Estrella
+                    de la Muerte ha sido
+                    destruida, las tropas
+                    imperiales han obligado a las
+                    fuerzas rebeldes a dejar sus
+                    sus bases secretas y las han
+                    perseguido a través de la
+                    galaxia.
+                </p>
+                <p>
+                    En una fuga de la temida Flota
+                    Imperial, un grupo de guerreros
+                    rebeldes liderado por Luke
+                    Skywalker ha establecido una
+                    nueva base secreta en la
+                    remota tierra congelada de
+                    Hoth.
+                </p>
+                <p>
+                    Darth Vader, Señor del mal,
+                    obsesionado con encontrar
+                    al joven Skywalker, ha
+                    despachado al lejano espacio
+                    miles de sondas a control
+                    remoto…
+                </p>
+
+            </div>
+        </article>
+    </section>
+
+    <hr>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <a href="index.html#temario-css">☝️</a>
+</body>
+
+</html>

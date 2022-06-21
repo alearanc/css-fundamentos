@@ -1,0 +1,1220 @@
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+}
+
+/***********************
+TRANSICIONES
+************************
+transition-property
+-------------------
+Define qué propiedades harán la transición.
+    transition-property: all;   -   Predeterminado. Hará la transición en
+                                    todas las propiedades:
+                                    -   background
+                                    -   color
+                                    -   transform
+                Nota:   En cierto punto, es una mala práctica, pues hace
+                        una transición de TODAS las propiedades. Esto quiere
+                        decir que no solo harán transiciones las propiedades
+                        definidas, sino que las que por defecto aplica el
+                        navegador también se verán afectadas.
+    transition-property: none;  -   El elemento no hará la transición. Es
+                                    instantáneo.
+    transition-property: background;
+    transition-property: color;
+    transition-property: transform;
+********************************************************************************
+transition-duration
+-------------------
+transition-duration: 0s;    -   La transición durará cero segundos, y por lo
+                                tanto, es instantánea.
+transition-duration: 1.25s; -   Se pueden usar decimales en segundos con la
+                                keyword s.
+transition-duration: 2400ms;-   Se pueden usar milisegundos en lugar de
+                                segundos, con la keyword ms.
+********************************************************************************
+
+transition-timing-function:
+--------------------------
+Define cómo se calculan los valores entre el inicio y el final de la transición.
+
+transition-timing-function: ease;   -   La transición comienza lento, acele-
+                                        ra en el medio y ralentiza al final.
+transition-timing-function: ease-in;-   La transición comienza lento y acele-
+                                        ra gradualmente hasta el final.
+transition-timing-function: ease-out;   -   La transición comienza rápidamen-
+                                            te y acelera gradualmente hasta
+                                            el final.
+transition-timing-function: ease-in-out;-   Como ease pero más pronunciado.
+                                            La transición comienza rápido y
+                                            acelera hasta el final.
+transition-timing-function: linear; -   La transición tiene una velocidad
+                                        constante.
+transition-timing-function: step-start; -   La transición tiene un salto
+                                            instantáneo hasta el estado final.
+transition-timing-function: step-end;   -   La transición se queda en el
+                                            estado inicial hasta el final,
+                                            cuando salta instantáneamente
+                                            hasta el final.
+transition-timing-function: steps(4, end);  -   Al usar steps() con un entero,
+                                                se puede definir un número
+                                                específico de pasos antes de
+                                                llegar al final. El estado del
+                                                elemento no variará gradualmen-
+                                                te, sino que saltará de estado
+                                                en estado en instantes separados.
+********************************************************************************
+transition-delay
+----------------
+Define cuánto tiempo tiene que esperar la transición antes de comenzar.
+    transition-delay: 0s;   -   La transición esperará cero segundos, y por lo
+                                tanto, comenzará de inmediato.
+    transition-delay: 1.25s;
+    transition-delay: 2400ms;
+    transition-delay: -500ms;   -   Se pueden usar valores negativos. La
+                                    transición comenzará como si ya se estuviera
+                                    estado reproduciendo 500ms.
+---------------
+SHORTHAND
+---------------
+transition: property duration timming-function delay;
+
+Nota: sólo la transition-duration es requerida.
+----------------------------------------------------*
+*/
+
+.box {
+    height: 200px;
+    border: thick solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5rem;
+    width: 200px;
+}
+
+.card {
+    border: thick solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5rem;
+    width: 600px;
+    height: 400px;
+}
+
+.card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 50%;
+}
+
+.transitions .box {
+    background-color: magenta;
+    border-color: aquamarine;
+    transition-property: background-color;
+    transition-duration: 500ms;
+    transition-timing-function: ease;
+    transition-delay: 0.5s;
+    transition: border-color 1.5s linear 1s;
+    /*
+    Solo está cancelando la propiedad transition, las demás
+    son ignoradas por cascada. Puede ser considerada mala práctica.
+    */
+    transition: all 2s ease-in-out 250ms;
+    transition: background-color 2s ease-in-out 250ms,
+        border-color 2s ease-in-out 250ms,
+        border-radius 2s ease-in-out 250ms;
+}
+
+.transitions .box:hover {
+    background-color: cyan;
+    border-color: red;
+    border-radius: 2rem;
+    /* border-style: dashed; No es animable */
+}
+
+.transitions .card {
+    transition: opacity 1s ease-out,
+        border-color 3s steps(5),
+        filter 2s ease-in 1s,
+        box-shadow 1.5s linear 2s;
+}
+
+.transitions .card:hover {
+    opacity: 75%;
+    border-color: orchid;
+    filter: blur(.15rem);
+    box-shadow: 1rem 1rem 2rem .5rem #000;
+}
+
+.transitions .card img {
+    transition: object-position 2s ease-in-out 3s;
+}
+
+.transitions .card img:hover {
+    object-position: 100% 50%;
+}
+
+/*****************************
+LISTA DE PROPIEDADES ANIMABLES
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animated_properties
+*/
+
+/***************
+TRANSFORMACIONES
+****************
+transform
+---------
+Define como es transformado el elemento.
+    transform: none;    -   Predeterminado. Remove cualquier transformación.
+    transform: translateX(40px);    -   Mueve el elemento en el eje horizon-
+                                        tal.
+    transform: translateY(20px);    -   Mueve el elemento en el eje vertical.
+    transform: translateY(100%);    -   Se pueden usar porcentajes. El por-
+                                        centaje es relativo al elemento en
+                                        sí y no al padre.
+    transform: translate(20px, -10%);   -   Se puede usar translate() con
+                                            dos valores:
+                                                1 - eje horizontal.
+                                                2 - eje vertical.
+    transform: scaleX(1.5); -   Escala el elemento en el eje horizontal.
+    transform: scaleY(0.4); -   Escala el elemento en el eje vertical.
+                                Se pueden usar valores negativos. Esto
+                                invertirá el elemento.
+    transform: scale(0.8, 0.8)  -   Se puede utilizar scale() con dos
+                                    valores:
+                                        1 - eje horizontal.
+                                        2 - eje vertical.
+                                    Al usar el mismo valores para ambos,
+                                    se escala proporcionalmente.
+    transform: rotate(45deg);   -   Rota el elemento. Se pueden usar:
+                                        - grados sexagesimales del 0 al
+                                          360deg.
+                                        - grados centesimales del 0 al
+                                          400grad.
+                                        - radianes de 0 a 2πrad.
+                                        - turns del 0 a 1turn.
+    transform: skewX(15deg);    -   Sesga el elemento en el eje horizontal.
+    transform: skewY(45deg);    -   Sesga el elemento en el eje vertical.
+    transform: skew(10deg, -20deg); -   Se pueden usar dos valores para el
+                                        sesgado, para el eje horizontal y
+                                        vertical respectivamente.
+
+    *********
+    SHORTHAND
+    ---------
+    transform: rotate(5deg) scale(1.1, 1.1) translate (-20%, 30px);
+
+*/
+.transform-2d img {
+    transition: transform 2s ease-in-out;
+}
+
+.transform-2d img:hover {
+    transform: none;
+    transform: translateX(4rem);
+    transform: translateY(4rem);
+    transform: translateY(-4rem);
+    transform: translateZ(-4rem);
+    transform: translate(-4rem, 4rem);
+    transform: translate(50%, -50%);
+    transform: translate(150px, -50%);
+
+    transform: scaleX(2);
+    transform: scaleY(.5);
+    transform: scale(1.5, 1.5);
+    transform: scale(-1.5, -1.5);
+
+    transform: rotateX(180deg);
+    transform: rotateY(-120deg);
+    transform: rotateZ(16deg);
+
+    transform: skewX(20deg);
+    transform: skewY(15deg);
+    transform: skew(-25deg, 5deg);
+
+    /*
+    Una transformación adicional es matrix() donde los valores que se admiten
+    son números enteros.
+    matrix( scaleX(), skewY(), skewX(), scaleY(), translateX(), translateY())
+
+    HAY QUE TENER CUIDADO AL USARLA.
+
+    https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix3d
+*/
+    transform: matrix(1, 2, 2, 1, 20, 10);
+
+    /*
+    Transformaciones múltiples
+*/
+    transform: translate(25%, -50%) rotate(75deg) skew(10deg, 20deg) scale(-0.5, -0.5);
+}
+
+/******************
+TRANSFORMACIONES 3D
+*******************
+transform: translate3d();
+-------------------------
+La función translate3d() reposiciona un elemento en el espacio 3D.
+
+Su resultado es un tipo de dato transform-function.
+
+https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate3d
+
+transform: scale3d();
+---------------------
+https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/scaleZ
+
+*/
+
+
+.transform-3d {
+    perspective: 10rem;
+    /*Utilizado solo si se usa translateZ*/
+}
+
+.transform-3d img {
+    transition: transform 2s ease-in-out;
+}
+
+.transform-3d img:hover {
+    transform: translateZ(4rem);
+    transform: perspective(1000px) translateZ(4rem);
+    transform: perspective(100rem) translateZ(4rem);
+    transform: perspective(10rem) translateZ(4rem);
+    transform: perspective(1rem) translateZ(4rem);
+    transform: perspective(10rem) translateZ(-4rem);
+    transform: translateZ(4rem);
+    /* Ver .transform-3d */
+
+    transform: translate3d(2rem, 50%, -3rem);
+
+    /*No se notan porque la imagen no tiene volumen*/
+    transform: scaleZ(1.5);
+
+    transform: scale3d(2, .5, 3);
+
+    transform: rotateX(60deg);
+    transform: rotateY(60deg);
+    transform: rotateX(-60deg);
+    transform: rotateY(-60deg);
+
+    /*rotate3d() utiliza valores numéricos que hacen referencia a nodos
+    vectoriales en cada uno de los ejes de la perspectiva 3D (x, y, z)
+    y luego simplemente hay que declarar un ángulo de inclinación.
+    */
+    transform: rotate3d(1, 1, 1, 210deg);
+    transform: rotate3d(1, .5, 0, 210deg);
+
+
+    /*
+    En transformaciones 3D también hay una función equivalente a
+    matrix() en 2D:
+
+    transform: matrix3d();
+    ----------------------
+    https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/matrix3d
+*/
+
+    transform: matrix3d(1, 0, 0, 0, 0, 1, 6, 0, 0, 0, 1, 0, 50, 100, 0, 1.1);
+
+    /*
+    Transformaciones múltiples en 3D
+*/
+
+    transform: rotate3d(-1, 2.5, -2, 60deg) translate3d(2rem, 50%, -3rem) scale3d(2, -.5, 3);
+}
+
+/*
+    Cuando rotamos un elemento, este lo hace a través de un eje.
+    Este eje es llamado origin y sus valores por defecto son
+    transform-origin: 50% 50% 0;
+*/
+
+.transform-origin img {
+    transition: transform 2s ease-in-out;
+    transform-origin: 50% 50% 0;
+    transform-origin: 0 0;
+    /*Respecto de la esquina superior izquierda*/
+    transform-origin: 0;
+    /*Respecto de 0 en X y 50% en Y*/
+    transform-origin: top left;
+    /*Igual que en 0 0*/
+    transform-origin: top right;
+    transform-origin: top center;
+    transform-origin: bottom center;
+    transform-origin: center left;
+    transform-origin: center center;
+    transform-origin: 2rem -2rem;
+    transform-origin: -6rem 1rem;
+}
+
+.transform-origin img:hover {
+    transform: rotate(360deg);
+}
+
+.flip-card-1,
+.flip-card-2 {
+    border: thick solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5rem;
+    width: 600px;
+    height: 400px;
+
+    position: relative;
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
+    transform-style: flat;
+    transform-style: preserve-3d;
+    /*Los elementos hijos tienen su propia perspectiva independiente*/
+}
+
+.flip-card-1:hover {
+    transform: rotateY(180deg);
+}
+
+.flip-card-2 {
+    transform-origin: center right;
+}
+
+.flip-card-2:hover {
+    transform: translateX(-100%) rotateY(-180deg);
+}
+
+.flip-card-1 img,
+.flip-card-2 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 50%;
+    perspective: 10rem;
+    /*
+    transform-style es una propiedad que establece si el elemento hijo
+    está posicionado en el espacio 3D (preserve-3d) o está integrado
+    (flat) en el plano del elemento.
+*/
+}
+
+.flip-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    /*
+    backface-visibility es una propiedad que determina si la cara posterior
+    de un elemento es visible de frente al usuario. La cara posterior de un
+    elemento siempre es un fondo transparente, permitiendo, cuando es
+    visible, que se muestre una imagen de espejo a la cara frontal.
+
+    Tiene efecto en transformaciones en 3D, no en 2D.
+*/
+    backface-visibility: visible;
+    backface-visibility: hidden;
+}
+
+.flip-front {
+    transform: rotateY(0deg);
+}
+
+.flip-back {
+    transform: rotateY(180deg);
+}
+
+/**********
+ANIMACIONES
+***********
+animation-name
+--------------
+Especifica una lista de animaciones que se deben aplicar al elemento
+seleccionado. Cada nombre indica un keyframe, esta regla define los valores
+de las propiedades de la secuencia de animación.
+
+    animation-name: none;   -   Default. Si no es especificado el nombre de
+                                la animación, ninguna animación es mostrada.
+    
+    animation-name: fadeIn; -   La animación se ve así: 
+        
+        @keyframes: fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+    animation-name: moveRight   -   La animación se ve así:
+
+        @keyframes: moveRight {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(100px);
+            }
+        }
+----------------------------------------------------------------------------
+animation-duration
+------------------
+Define cuánto tiempo dura la animación.
+
+    animation-duration: 0s; -   Default. La animación simplemente no se
+                                reproduce.
+    
+    animation-duration: 1.2s    -   Se pueden usar valores decimales en se-
+                                    gundos con la keyword s.
+    
+    animation-duration: 2400ms  -   Se pueden usar milisegundos en lugar de
+                                    segundos, con la keyword ms.
+----------------------------------------------------------------------------
+animation-timing-function
+-------------------------
+Define cómo se calculan los valores entre el inicio y el final de la anima-
+ción.
+
+    animation-timing-function: ease;    -   La animación comienza lento, ace-
+                                            lera en el medio y desacelera al
+                                            final.
+
+    animation-timing-function: ease-in; -   La animación comienza lento, y
+                                            acelera gradualmente hasta el
+                                            final.
+
+    animation-timing-function: ease-out;-   La animación comienza rápidamente
+                                            y desacelera gradualmente hasta
+                                            el final.
+                                            
+    animation-timing-function: ease-in-out; -   Como ease pero más pronuncia-
+                                                do.
+
+    animation-timing-function: linear;  -   La animación tiene una velocidad
+                                            constante.
+
+    animation-timing-function: step-start;  -   La animación salta instan-
+                                                táneamente al estado final.
+
+    animation-timing-function: step-end;    -   La animación permanece en el
+                                                estado inicial hasta el fin-
+                                                al, cuando salta instantánea-
+                                                mente al estado final.
+
+    animation-timing-function: steps(4, end);   -   Se puede definir un nú-
+                                                    mero específico de pasos
+                                                    antes de llegar al final.
+                                                    El estado del elemento
+                                                    no variará gradualmente,
+                                                    sino que hará un salto
+                                                    de estado en estado en
+                                                    instantes separados.
+----------------------------------------------------------------------------
+animation-delay
+---------------
+Define cuanto tiempo tiene que esperar antes de comenzar. La animación solo
+podrá ser retrasada en la primera iteración.
+
+    animation-delay: 0s;    -   Default. La animación esperará cero segundos,
+                                y por lo tanto, comenzará de inmediato.
+
+    animation-delay: 1.2s;  -   Se pueden usar valores decimales en segundos
+                                con la keyword s.
+    
+    animation-delay: 2400ms;-   Se pueden usar milisegundos en lugar de se-
+                                gundos, con la keyword ms.
+
+    animation-delay: -500ms;-   Se pueden usar valores negativos: La anima-
+                                ción empezar como si ya se estuviera repro-
+                                duciendo.
+----------------------------------------------------------------------------
+animation-iteration-count
+-------------------------
+Define cuantas veces será reproducida la animación.
+
+    animation-iteration-count: 1;   -   La animación se reproducirá solo una
+                                        vez.
+
+    animation-iteration-count: 2;   -   Se pueden usar valores enteros para
+                                        definir una cantidad específica de
+                                        veces que la animación se reproduci-
+                                        rá.
+
+    animation-iteration-count: infinite;    -   Al utilizar la keyword
+                                                infinite, la animación se
+                                                reproducirá infinitamente.
+----------------------------------------------------------------------------
+animation-direction
+-------------------
+Define en qué dirección se reproduce.
+
+    animation-direction: normal;    -   La animación es reproducida hacia
+                                        delante. Cuando esta llega al final,
+                                        comienza de nuevo en el primer
+                                        keyframe.
+
+    animation-direction: reverse;   -   La animación es reproducida hacia
+                                        atrás: comienza en el último keyframe
+                                        y finaliza en el primer keyframe.
+
+    animation-direction: alternate; -   La animación es reproducida hacia
+                                        delante primero, luego hacia atrás.
+                                            -   Comienza en el primer
+                                                keyframe.
+                                            -   Se detiene en el último
+                                                keyframe.
+                                            -   Comienza otra vez, pero en
+                                                el último keyframe.
+                                            -   Se detiene en el primer
+                                                keyframe.
+    
+    animation-direction: alternate-reverse; -   La animación es reproducida
+                                                hacia atrás primero, luego
+                                                hacia delante.
+                                                -   Comienza en el último
+                                                    keyframe.
+                                                -   Se detiene en el primer
+                                                    keyframe.
+                                                -   Comienza otra vez, pero
+                                                    en el primer keyframe.
+                                                -   Se detiene en el último
+                                                    keyframe.
+----------------------------------------------------------------------------
+animation-fill-mode
+-------------------
+Define qué sucede antes de que una animación comience y luego de que esta
+termina. El fill mode permite decirle al navegador si el estilo de la anima-
+ción también deben ser aplicada fuera de la animación.
+
+    animation-fill-mode: none;  -   Default. Los estilos de la animación no
+                                    afectan al estilo predeterminado: El ele-
+                                    mento es seteado en su estado por defecto
+                                    antes de que la animación inicie, y vuel-
+                                    ve a ese estado por defecto luego de
+                                    que la animación termina.
+
+    animation-fill-mode: forwards;  -   Los últimos estilos aplicados al
+                                        final de la animación se conservan.
+
+    animation-fill-mode: backwards; -   Los estilos de la animación son apli-
+                                        cados antes de que la animación ac-
+                                        tual inicie.
+
+    animation-fill-mode: both;  -   Los estilos son aplicados antes y des-
+                                    pués de que la animación se reproduzca.
+
+*********
+SHORTHAND
+*********
+    animation: name duration timing-function delay iteration-count direction fill-mode;
+---------------------------------------------------------------------------------------
+
+NOTA: las requeridas son animation-name y animation-duration.
+*/
+
+@keyframes myAwesomeAnimation {
+    from {
+        opacity: 0;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(100%);
+    }
+}
+
+.my-animation {
+    /*
+    La propiedad play-state tiene su mayor utilidad cuando complementamos
+    CSS con JS. Básicamente indica el estado de la animación y tiene dos
+    valores: running y stop.
+*/
+    animation-name: myAwesomeAnimation;
+    animation-duration: 2s;
+    animation-timing-function: cubic-bezier(1, 0, 0, 1);
+    animation-timing-function: cubic-bezier(.17, .67, .83, .67);
+    animation-timing-function: ease-in-out;
+    animation-delay: 1500ms;
+    animation-iteration-count: 1;
+    animation-iteration-count: 3;
+    animation-iteration-count: infinite;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-direction: reverse;
+    animation-direction: alternate-reverse;
+    animation-direction: alternate;
+    animation-fill-mode: none;
+    animation-fill-mode: forwards;
+    animation-fill-mode: backwards;
+    animation-fill-mode: both;
+    animation-play-state: running;
+    animation-play-state: paused;
+    animation: myAwesomeAnimation 1.5s ease 250ms 6 alternate both running;
+    animation: myAwesomeAnimation 1.5s ease 250ms 7 alternate both running;
+    animation: myAwesomeAnimation 2s;
+}
+
+@keyframes myAwesomeAnimation2 {
+    0% {
+        opacity: 0;
+        transform: translateX(0%);
+    }
+
+    50% {
+        opacity: .5;
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translate(75%, -75%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(100%);
+    }
+}
+
+.my-animation-2 {
+    animation: myAwesomeAnimation2 2s;
+}
+
+@keyframes multipleAnimation1 {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes multipleAnimation2 {
+    0% {
+        transform: translateY(0%);
+    }
+
+    50% {
+        transform: translateY(-100%);
+    }
+
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.animation-multiple {
+    animation: multipleAnimation1 2s infinite, multipleAnimation2 2s 3;
+}
+
+/************************
+EJEMPLOS DE ANIMACIONES*/
+
+.motion-examples {
+    text-align: center;
+}
+
+.fade-in {
+    font-size: 5vw;
+    /*Delay de 2s para ver la diferencia con el fadeout*/
+    animation: fadeIn 2s linear 2s infinite alternate;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fade-out {
+    font-size: 5vw;
+    animation: fadeOut 2s linear 2s infinite alternate;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate(-1px, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate(2px, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate(-4px, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate(4px, 0);
+    }
+}
+
+.shake {
+    font-size: 5vw;
+    display: inline-block;
+    /*Para que solo sirva el hover sobre el emoji y no sobre la linea*/
+    cursor: pointer;
+}
+
+.shake:hover {
+    animation: shake 1s cubic-bezier(.36, .07, .19, .97) both;
+    transform: translate(0, 0);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1.1);
+    }
+
+    50% {
+        transform: scale(.8);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.pulse {
+    font-size: 5vw;
+    animation: pulse 2s linear infinite;
+}
+
+@keyframes heartColor {
+    10% {
+        background-color: #d00;
+    }
+}
+
+.heart {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 10vw;
+    height: 10vw;
+    animation: pulse 1s infinite;
+}
+
+.heart::after,
+.heart::before {
+    position: absolute;
+    content: "";
+    left: 5vw;
+    top: 0;
+    width: 5vw;
+    height: 8vw;
+    background-color: #a00;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+    border-radius: 5vw 5vw 0 0;
+    animation: heartColor 1s infinite;
+}
+
+.heart::after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+/*****************
+SPINNER / LOADER*/
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.spinner {
+    /* background-color: aqua; */
+    width: 5vw;
+    height: 5vw;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+    border: .5vw solid rgba(0, 0, 0, .1);
+    border-left-color: #09f;
+    animation: spinner 1s ease-out infinite;
+}
+
+/*****************
+BOTONES ANIMADOS*/
+
+.btn {
+    position: relative;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.2rem;
+    width: 15rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: .25rem .25rem .5rem .25rem rgba(0, 0, 0, .15);
+}
+
+.anim-bottom::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    /*Es un 10% de la altura del boton*/
+    height: .25rem;
+    background-color: #d00;
+    transition: width .5s ease, left .5s ease, right .5s ease;
+}
+
+.anim-bottom:hover::after {
+    width: 100%;
+}
+
+.to-left::after {
+    left: 0;
+}
+
+.to-center::after {
+    left: 50%;
+}
+
+.to-center:hover::after {
+    left: 0;
+}
+
+.to-right::after {
+    right: 0;
+}
+
+.anim-bg-gradient {
+    background-image: linear-gradient(to right, pink, violet, orange, orangered);
+    /*Amplía el tamaño del fondo, desaparecen los colores anaranjados y rojizos*/
+    background-size: 300% 100%;
+    transition: background-position 1s ease-in-out;
+}
+
+.anim-bg-gradient:hover {
+    /*Se mueve a los colores anaranjados rojizos*/
+    background-position: 100% 0;
+}
+
+.tabs-menu {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ddd;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 70%;
+    height: 3rem;
+    /*Flexbox*/
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tabs-menu input[type="radio"] {
+    display: none;
+}
+
+.tabs-menu label {
+    z-index: 1;
+    position: relative;
+    width: calc(100% / 4 - 0.5rem);
+    text-align: center;
+    cursor: pointer;
+}
+
+.tabs-menu label:hover {
+    color: #fff;
+}
+
+.tabs-menu input[type="radio"]:checked+label {
+    color: #fff;
+}
+
+.tab-bg-hover {
+    position: absolute;
+    width: calc(100% / 4 - 0.5rem);
+    height: 2rem;
+    border-radius: .5rem;
+    background-image: linear-gradient(90deg, #a00, #d00);
+    transition: transform 300ms ease-in-out;
+}
+
+#tab-1:checked~.tab-bg-hover {
+    transform: translateX(0);
+}
+
+#tab-2:checked~.tab-bg-hover {
+    transform: translateX(100%);
+}
+
+#tab-3:checked~.tab-bg-hover {
+    transform: translateX(200%);
+}
+
+#tab-4:checked~.tab-bg-hover {
+    transform: translateX(300%);
+}
+
+/**************************************
+MENÚ DE HAMBURGUESA / PANEL OF CANVAS*/
+
+/*IMPORTATE: los selectores input, label y nav deben ser
+hermanos para que funcione este método sin JS. Se hará uso
+del selector de hermanos "~"
+*/
+
+.off-canvas-btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 999;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    /* Aunque se quite la opacidad, el btn sigue funcional */
+    opacity: 0;
+}
+
+.off-canvas-burger {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 3rem;
+    z-index: 998;
+    height: 0.6rem;
+    background-color: #d00;
+    border-radius: 0.3rem;
+    transform-origin: top left;
+    transform: rotate(0deg) translate(0, -1.2rem);
+    transition: transform 0.5s ease, background-color 500ms ease;
+}
+
+.off-canvas-burger::before,
+.off-canvas-burger::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 0.6rem;
+    background-color: #d00;
+    border-radius: 0.3rem;
+    transition: transform 500ms ease;
+}
+
+.off-canvas-burger::before {
+    transform: rotate(0deg) translate(0, -0.9rem);
+    /* background-color: blue; */
+}
+
+.off-canvas-burger::after {
+    transform: rotate(0deg) translate(0, 0.3rem);
+    /* background-color: green; */
+}
+
+.off-canvas-btn:checked+.off-canvas-burger {
+    background-color: transparent;
+}
+
+.off-canvas-btn:checked+.off-canvas-burger::before {
+    transform: rotate(45deg) translate(0, 0);
+}
+
+.off-canvas-btn:checked+.off-canvas-burger::after {
+    transform: rotate(-45deg) translate(0.4rem, -0.5rem);
+}
+
+.off-canvas-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 997;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0008;
+    transform: translate(-100%, 0);
+    transition: transform 500ms ease-in-out;
+}
+
+.off-canvas-menu-container {
+    /* background-color: rebeccapurple; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+
+}
+
+.off-canvas-link {
+    border-bottom: thin solid #d00;
+    padding: 2rem;
+    font-size: 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 300ms ease;
+}
+
+.off-canvas-link:first-child {
+    border-top: thin solid #d00;
+}
+
+.off-canvas-link:hover {
+    background-color: #d005;
+}
+
+.off-canvas-btn:checked~.off-canvas-menu {
+    transform: translate(0, 0);
+}
+
+/**************
+VENTANA MODAL*/
+
+.modal {
+    /*mismos estilos que el menu canvas*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 997;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0008;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 500ms ease-in-out;
+}
+
+.modal:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-container {
+    /*xq dentro del container está la X de cierre posicionada absolute*/
+    position: relative;
+    border: thick double #d00;
+    border-radius: 1rem;
+    padding: 2rem;
+    background-color: #fff;
+    width: 50%;
+    height: 70vh;
+    display: flex;
+    /*para organizar el contenido, sino estaría en row (feo)*/
+    flex-direction: column;
+    text-align: left;
+    overflow: hidden;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #d00;
+    text-align: center;
+    line-height: 3rem;
+    text-decoration: none;
+    border-radius: 50%;
+    transition: background-color 300ms linear, transform 300ms ease-in-out;
+}
+
+.modal-close:hover {
+    background-color: #a00;
+    transform: scale(1.2);
+}
+
+/*****************
+INTRO STAR WARS*/
+
+@keyframes introStarWars {
+    0% {
+        transform: perspective(100vh) rotateX(15deg) translateY(100%);
+    }
+
+    100% {
+        transform: perspective(100vh) rotateX(25deg) translateY(-200%);
+    }
+}
+
+.star-wars {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    color: #ffb13a;
+    background-image: url(../assets/stars.gif);
+}
+
+.star-wars-container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    text-align: justify;
+    letter-spacing: .1rem;
+    animation: introStarWars 30s linear infinite;
+}
+
+.star-wars h2,
+.star-wars h3{
+    font-size: 5vw;
+    text-align: center;
+}
+
+.star-wars p {
+    font-size: 3vw;
+    line-height: 4rem;
+}

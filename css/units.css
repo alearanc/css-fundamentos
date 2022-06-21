@@ -1,0 +1,192 @@
+/*******************
+UNIDADES DE MEDIDA
+
+1)  Absolutas (su valor no cambia, son unidades del mundo real)
+    pc, com, mm, in, Q
+    pt (1/72in)
+    px (1/96in)
+2)Relativas (su valor es relativo a un contexto)
+    em, rem, ex, ch - al tamaño de la fuente
+        em - basada en la anchura de la "m" de la fuente del elemento
+        rem - basada en la anchura de la "m" de la fuente del elemento raíz (html)
+        ex - basada en la altura de la "x" de la fuente del elemento
+        ch - basada en la anchura del "0" de la fuente del elemento
+    % - al tamaño del contenedor
+    vw, vh, vmin, vmax - al tamaño del viewport
+        vw - ancho del viewport, va de 1 a 100
+        vh - alto del viewport, va de 1 a 100
+        vmax - entre vw y vh toma el que tenga mayor valor
+        vmin - entre vw y vh toma el que tenga menor valor
+
+Conversiones entre unidades - http://pxtoem.com/
+*/
+
+html {
+    background-color: black;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: beige;
+    margin: 0;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+    /*
+        Al tener el reseteo, si agrego un padding la caja no crece
+    */
+.pixels {
+    background-color: cadetblue;
+    font-size: 16px;
+    width: 500px;
+    height: 400px;
+    padding: 20px;
+    border: 5px solid rebeccapurple;
+}
+
+.ems {
+    background-color: cadetblue;
+    font-size: 24px;
+    padding: 1em .5em;
+    border: 5px solid rebeccapurple;
+}
+
+.em-child {
+    background-color: salmon;
+    border: thick solid beige;
+    margin: .5em;
+    padding: 1em;
+    font-size: 2em;
+}
+
+.rems {
+    background-color: cadetblue;
+    font-size: 24px;
+    padding: 1rem .5rem;
+    border: 5px solid rebeccapurple;
+}
+
+.rem-child {
+    background-color: salmon;
+    border: thick solid beige;
+    margin: .5rem;
+    padding: 1rem;
+    font-size: 2rem;
+}
+
+.exs {
+    background-color: cadetblue;
+    font-size: 24px;
+    padding: 1ex .5ex;
+    border: 5px solid rebeccapurple;
+}
+
+.ex-child {
+    background-color: salmon;
+    border: thick solid beige;
+    margin: .5ex;
+    padding: 1ex;
+    font-size: 2ex;
+}
+
+.chs {
+    background-color: cadetblue;
+    width: 10ch;
+}
+
+.percentages {
+    background: darkkhaki;
+    padding: 5%;
+    margin: 20% 10%;
+    /*  
+        el div está al 60% del ancho de su contenedor
+        mientras que el span no
+    */
+    width: 80%;
+    /*
+        Hay que tener cuidado con la altura, va a estar condicionada
+        dependiendo del contenido. Por ejemplo, si quitamos todo el
+        contenido, excepto por un h1, el body va a tener una altura
+        conforme al h1, mientras que el html ocupa todo el espacio.
+        La altura del body (contenedor) va a depender del contenido (<h1>)
+
+        En el width no hay problema.
+    */
+    height: 100%;
+    font-size: 150%;
+}
+
+.height-parent {
+    background-color: brown;
+    width: 500px;
+    height: 500px;
+}
+.height-child {
+    background-color: coral;
+    width: 50%;
+    height: 50%;
+}
+
+/*usando viewport no importa el tamaño del contenedor*/
+.viewport {
+    background-color: darkcyan;
+    /*
+        Recordar que el body tiene márgenes por defecto.
+        Si se usa un width de 100vw, hay que quitarle los márgenes
+        al body.
+
+        Las barras de scroll del navegador también forman parte
+        del viewport.
+    */
+    /*
+    Usando % la barra de scroll desaparece, pues los % están
+    basados en el tamaño del contenedor
+    */
+    width: 100vw;
+    width: 100%;
+    height: 50vh;
+    font-size: 2vw;
+    padding: 2vh 2vw;
+}
+
+    /*
+        Si deseo crear una hero-image puedo crear una clase 
+        fullscreen
+    */
+
+.vmin,
+.vmax {
+    background-color: darksalmon;
+    border: thick solid cyan;
+    width: 50vmax;
+    height: 50vmin;
+}
+
+
+/*
+    TIPS PARA USO DE UNIDADES
+
+    Absolutas:
+    Cuando un diseño se va a imprimir, conviene utilziar
+    mm, cm, pc, px, in, etc.
+
+    Relativas:
+    -   font-size del html (base) en px
+    -   para todo lo relacionado a tipografía en rem
+    -   distancias de paddings, margins en rem o em
+        -   em cuando por ejemplo se trabaja con tarjetas y se 
+            necesita respetar proporcionalmente los espaciados
+    -   si se trabaja con componentes de tipo tarjeta, y se tiene
+        definida la cantidad de renglones de un texto contenido, 
+        entonces la altura de la caja de descripción puede estar
+        definida en ex (pues se basa en distancia de caracteres)
+    -   cuando se tenga la necesidad de delimitar que cierto con-
+        tenedor tiene que tener la dimension de x cantidad de ca-
+        racteres, conviene definir los ch.
+    -   en el diseño responsive se utilizan mucho los %
+/*

@@ -1,0 +1,353 @@
+/* ********************
+EL MODELO DE CAJA
+https://developer.mozilla.org/es/docs/Learn/CSS/Building_blocks/The_box_model
+
+Es la forma en que CSS ve a los elementos HTML. ¿Cómo los ve? Como si fueran cajas con las siguientes propiedades:
+    1)  El contenido (content). EL texto del elemento HTML, tomando en cuenta sus dimensiones (width, height)
+    2)  Borde (border). Lo que delimita cada uno de los elementos HTML
+    3·  EL relleno (padding). Son las distancias internas, es decir, la distancia del borde al contenido.
+    4)  El margen (margin). Son las distancias externas, es decir, la distancia entre el elemento HTML
+        y sus elementos hermanos o padres.
+
+    Dentro del modelo de caja hay que considerar que una caja contiene 4 lados.
+    1) top
+    2) right
+    3) bottom
+    4) left
+
+*/
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+/*
+    El border de una caja tiene 3 propiedades (border-color,
+    border-width y border-style). A su vez, cada propiedad se subdivide en
+    otras 4 dependiendo del lado de la caja (border-top-color,
+    border-right-color, etc.) Entonces, en total son 12 propiedades de
+    border.
+*/
+
+h1 {
+    width: 400px;
+    height: 200px;
+
+    /*propiedades tipo shorthand*/
+    border-color: green;
+    /*thin - 1px, medium - 3px, thick - 5px*/
+    border-width: thick;
+    border-style: solid;
+    /*La siguiente línea aplica las 3 propiedades en una sóla línea*/
+    border: 2px dashed blue;
+}
+
+.box-one,
+.box-two {
+    background-color: chocolate;
+    border: medium solid orange;
+    /*
+    Esto aplica para margin y padding
+    1 valor:    aplica a los 4 lados
+    
+    2 valores:  1er valor para los lados verticales (top y bottom)
+                2do valor para los lados horizontales (right y left)
+    
+    3 valores:  1er valor para top
+                2do valor para left y right
+                3er valor para bottom
+
+    4 valores:  1er valor para top
+                2do valor para right
+                3er valor para bottom
+                4to valor para left
+    */
+    padding: 10px;
+    margin: 20px;
+    padding: 20px 40px;
+    margin: 40px 20px;
+    padding: 0 40px 20px;
+    margin: 50px 30px 0;
+    padding: 0 40px 20px 50px;
+    margin: 100px 50px 30px 0;
+}
+
+/*
+Caja de Linea
+    - Ocupan el espacio necesario para mostrar su contenido.
+    - No tienen dimensiones modificables (width, height).
+    - Permiten otros elementos a su lado.
+    - Padding y margin solo empujan a elementos adyacentes en horizontal,
+    NUNCA EN VERTICAL.
+
+Caja de Bloque
+    - Ocupan todo el ancho disponible.
+    - Tienen dimensiones modificables (alto, ancho).
+    - No permiten otros elementos a su lado (aunque especifique un
+    ancho, siguen ocupando todo el espacio disponible).
+*/
+
+.caja-linea,
+.caja-bloque {
+    background-color: darkcyan;
+    color: white;
+    width: 500px;
+    height: 250px;
+    border: medium solid black;
+    padding: 16px;
+}
+
+
+.caja-bloque {
+    margin: 32px;
+    display: block;
+    display: inline;
+}
+
+.caja-linea {
+    margin: 48px;
+    display: inline;
+    display: block;
+}
+
+/* **************
+PROPIEDAD DISPLAY
+    inline
+    block
+    inline-block -  Se comporta como un elemento de linea pero acepta
+                    modificar sus dimensiones (width, height)
+    none
+    table
+    list-item
+    flex
+    grid
+*/
+
+.caja-none,
+.caja-linea-bloque,
+.caja-hidden {
+    background-color: darkolivegreen;
+    color: white;
+    width: 600px;
+    height: 300px;
+    border: medium solid black;
+}
+
+.caja-linea-bloque {
+    display: inline-block;
+}
+
+.caja-none {
+    /*Aunque se oculta la caja, el contenido es cargado igualmente*/
+    display: none;
+}
+
+/*
+Tanto las etiquetas <ol> como las <ul> tienen un display: block;
+Las etiquetas  <li> tienen un display: list-item; que, lo que hace, es
+agregarle un poco de sangría en el margen izquierdo.
+
+Las <table> tienen un display: table;
+las <tr> tienen un display: table-row;
+Las <td> tienen un display: table-cell;
+*/
+
+/* **************
+PROPIEDAD VISIBILITY
+La propiedad visibility, por defecto, tiene un valor "visible"
+
+element {
+    visibility: visible
+}
+
+Pero si se cambia el valor a "hidden"", el elemento es ocultado,
+conservando el espacio que ocupaba.
+
+element {
+    visibility: hidden;
+}
+
+*/
+
+.caja-hidden {
+    visibility: visible;
+    visibility: hidden;
+}
+
+/* **********
+PROPIEDAD OVERFLOW
+Nos permite decir qué va a pasar con el contenido que desborde su caja
+contenedora.
+
+    hidden -    El contenido que se desborda es ocultado.
+    scroll -    El contenido es escroleable y se agregan las barras de
+                desplazamiento vertical y horizontal.
+    auto -      El contenido es escroleable, pero sólo se añade la barra de
+                desplazamiento vertical, en caso de que el contenido se
+                pueda adaptar por sí mismo al ancho del elemento contenedor.
+
+Adicionalmente tenemos las propiedades overflow-x y overflow-y, pudiendo
+aplicar el overflow para un lado o para otro.
+
+*/
+
+.overflow {
+    background-color: darkturquoise;
+    width: 200px;
+    height: 100px;
+    overflow: visible;
+    overflow: hidden;
+    overflow: scroll;
+    overflow: auto;
+    /* overflow-x: scroll; */
+    /* overflow-y: scroll; */
+}
+
+/* ************
+BOX-SIZING
+
+Nos va a decir desde donde se va a empezar a considerar el tamaño de la
+caja.
+
+Valores:
+    content-box - Valor por defecto.
+    border  -   el tamaño de la caja se considera desde el borde
+                (los margins y paddings consideran al borde).
+
+*/
+
+.box-sizing-content,
+.box-sizing-border {
+    background-color: deepskyblue;
+    border: thick solid black;
+    box-sizing: content-box;
+    width: 500px;
+    height: 250px;
+    padding: 10px;
+    /*  w500 + 10 + 10 + 5 + 5= 530    */
+    /*  h250 + 10 + 10 + 5 + 5= 280    */
+    /*  Sin embargo el box model nos dice que el
+    tamaño sigue siendo 500*250 */
+}
+
+.box-sizing-border {
+    box-sizing: border-box;
+
+    /*  El tamaño del contenido se reduce para mantener el tamaño
+    considerado desde el borde de la caja.  */
+}
+
+.container-col-3 {
+    background-color: burlywood;
+    width: 600px;
+    /*  Agrego altura para no perder las propiedades (como el color de fondo)
+    del container, como side effect de flotar elementos.    */
+    height: 300px;
+    margin-top: 20px;
+}
+
+.container-col-3>* {
+    box-sizing: border-box;
+    width: 200px;
+    /*  Al agregar un borde, los elementos flotados que desbordaban el tamaño
+    del contenedor, pasaban a la siguiente línea (Esto es, como 
+    consecuencia de tener el "box-sizing: content-box;" por defecto).
+    
+    Para solucionar esto, se debían realizar cálculos para cambiar
+    los tamaños de los elementos hijos o del elemento padre.    */
+    border: thin solid red;
+
+    /*  Flota los elementos hijos del container hacia la izquierda.
+    Actualmente NO RECOMENDADO, puesto que se utilizan layouts como
+    grid o flexbox. */
+    float: left;
+}
+
+/*
+https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+
+Este seteo se hace al principio del archivo, pero para respetar el
+orden de las clases del curso, se setea acá.
+
+apply a natural box layout model to all elements, but allowing components to change */
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* **************
+PROPIEDAD FLOAT
+    Nos permite flotar elementos hacia la derecha o hacia la izquierda.
+    Se utilizaba con anterioridad como metodo de maquetación. 
+*/
+
+.container-floats {
+    background-color: cornflowerblue;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    /* color: white; */
+    float: right;
+}
+
+.clear-fix {
+/*  Arrgela los efectos secundarios de float*/
+    clear: both;
+}
+
+/* ***************************
+COLAPSO DE MÁRGENES VERTICALES
+*/
+
+.margin-collapse {
+    background-color: skyblue;
+}
+
+.margin-collapse section {
+    border: thin solid black;
+    margin-top: 16px;
+/*  Lo común es pensar que habría una separación de 32px entre una sección
+    y la otra, pero es el problema del colapso de márgenes verticales.
+    
+    Los márgenes verticales de un elemento con otro se acoplan, se
+    enciman. No se suman los márgenes.
+    
+    En los márgenes horizontales SÍ se suman.
+
+    Lo ideal es que los elementos tengan margin-top o margin-bottom,
+    PERO NO AMBOS.
+*/
+    margin-bottom: 16px;;
+}
+
+.margin-collapse span {
+    border: thin solid black;
+    display: inline-block;
+/*  Los márgenes horizontales se suman  */
+    margin-right: 16px;
+    margin-left: 16px;
+}
+
+/* *******************
+CENTRADO DE CAJAS
+*/
+
+.sitio-web {
+    border: thin solid black;
+    background-color: thistle;
+    width: 800px;
+    height: 1000px;
+    padding: 16px;
+    margin-left: auto;
+    margin-right: auto;
+}

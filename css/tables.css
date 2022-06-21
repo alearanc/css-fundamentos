@@ -1,0 +1,19 @@
+.table {
+    font-size: 3rem;
+    /*Exclusiva del selector table*/
+    border-collapse: collapse;
+    border-collapse: separate;  /*Default*/
+    /*Oculta la celda vacía*/
+    empty-cells: hide;
+    empty-cells: show; /*Default*/
+}
+
+table,
+th,
+td {
+    border: medium solid black;
+    /*Espaciado entre celdas, border-collapse debe tener
+    el valor separate*/
+    border-spacing: 0;
+    border-spacing: 1rem;
+}
